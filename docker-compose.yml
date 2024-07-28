@@ -3,17 +3,24 @@ version: '3.9'
 services:
   weathermonitoring_pgadmin:
     image: dpage/pgadmin4
+    depends_on:
+      - weathermonitoring_postgresql
 
   weathermonitoring_postgresql:
     image: postgres:14.1
 
   weathermonitoring_api:
     image: ${DOCKER_REGISTRY-}weathermonitoringapi
+    restart: always
     build:
       context: ./server/weather-monitoring
       dockerfile: Systems/Api/WeatherMonitoring.Api/Dockerfile
+    depends_on:
+      - weathermonitoring_pgadmin
   
   weathermonitoring_client:
     build:
       context: ./client/weather-monitoring
       dockerfile: Dockerfile
+    depends_on:
+      - weathermonitoring_api

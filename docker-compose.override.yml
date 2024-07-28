@@ -30,9 +30,9 @@ services:
       - shared_weathermonitoring_net
     env_file:
       - env.api
-    depends_on:
-      - weathermonitoring_postgresql
-      - weathermonitoring_pgadmin
+    # depends_on:
+    #   - weathermonitoring_postgresql
+    #   - weathermonitoring_pgadmin
   
   weathermonitoring_client:
     ports:
@@ -44,8 +44,8 @@ services:
     # volumes:
     #   - ./client/weather-monitoring:/app
     #   - /app/node_modules
-    depends_on:
-      - weathermonitoring_api
+    # depends_on:
+    #   - weathermonitoring_api
 
 volumes:
   weathermonitoring-pgdata:
