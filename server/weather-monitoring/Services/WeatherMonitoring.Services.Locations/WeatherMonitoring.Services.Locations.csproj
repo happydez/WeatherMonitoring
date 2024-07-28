@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+  	<PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\WeatherMonitoring.Context\WeatherMonitoring.Context.csproj" />
+    <ProjectReference Include="..\..\Data\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj" />
+    <ProjectReference Include="..\WeatherMonitoring.Services.WeatherApi\WeatherMonitoring.Services.WeatherApi.csproj" />
+    <ProjectReference Include="..\WeatherMonitoring.Services.Weathers\WeatherMonitoring.Services.Weathers.csproj" />
+  </ItemGroup>
+
+</Project>

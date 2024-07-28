@@ -1,0 +1,119 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{489F952E-462D-446C-8896-DB2D22F986C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C6BBF07F-E135-4943-AB3D-F1A6F6E804B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Api", "Systems\Api\WeatherMonitoring.Api\WeatherMonitoring.Api.csproj", "{B8F7D349-40D6-412D-9A0D-8766A70857DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0584D6B3-4D80-4E37-AB6E-BC3FE4F43BD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Common", "Shared\WeatherMonitoring.Common\WeatherMonitoring.Common.csproj", "{43B3234D-6EAC-4E5C-8152-04B6224AB29E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{381EC89F-FFCD-4551-AFA4-7C5F9F4AF361}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Context", "Data\WeatherMonitoring.Context\WeatherMonitoring.Context.csproj", "{4E5F87A1-F172-4C1C-90E1-698F635014AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Context.Seeder", "Data\WeatherMonitoring.Context.Seeder\WeatherMonitoring.Context.Seeder.csproj", "{9686E422-1BA5-4F64-85E9-71D1749D4870}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Entities", "Data\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj", "{B0C5F4E5-562C-424C-8B99-8C02EC5157B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeatherMonitoring.Context.Migrations", "WeatherMonitoring.Context.Migrations", "{CD2055E1-C153-4B30-8ED6-C57DAA06106D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Context.Migrations.PgSql", "Data\WeatherMonitoring.Context.Migrations\WeatherMonitoring.Context.Migrations.PgSql\WeatherMonitoring.Context.Migrations.PgSql.csproj", "{2A6C58C9-30E9-4DEE-8278-03AE611D455C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2D864CAD-30C3-4C0C-B727-96D5FA9A252B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.WeatherMonitoring", "Services\WeatherMonitoring.Serivces.WeatherMonitoring\WeatherMonitoring.Services.WeatherMonitoring.csproj", "{CB92ABE7-E991-44D1-87BE-EE9EE73397CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.Locations", "Services\WeatherMonitoring.Services.Locations\WeatherMonitoring.Services.Locations.csproj", "{92D87A39-880E-4917-B6D7-37085B94D3E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.WeatherApi", "Services\WeatherMonitoring.Services.WeatherApi\WeatherMonitoring.Services.WeatherApi.csproj", "{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.Weathers", "Services\WeatherMonitoring.Services.Weathers\WeatherMonitoring.Services.Weathers.csproj", "{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.Logger", "Services\WeatherMonitoring.Services.Logger\WeatherMonitoring.Services.Logger.csproj", "{118D248B-81E9-4CB6-A028-573FE67A5A4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoring.Services.Settings", "Services\WeatherMonitoring.Services.Settings\WeatherMonitoring.Services.Settings.csproj", "{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8F7D349-40D6-412D-9A0D-8766A70857DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F7D349-40D6-412D-9A0D-8766A70857DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F7D349-40D6-412D-9A0D-8766A70857DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F7D349-40D6-412D-9A0D-8766A70857DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B3234D-6EAC-4E5C-8152-04B6224AB29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B3234D-6EAC-4E5C-8152-04B6224AB29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B3234D-6EAC-4E5C-8152-04B6224AB29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B3234D-6EAC-4E5C-8152-04B6224AB29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5F87A1-F172-4C1C-90E1-698F635014AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5F87A1-F172-4C1C-90E1-698F635014AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5F87A1-F172-4C1C-90E1-698F635014AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5F87A1-F172-4C1C-90E1-698F635014AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9686E422-1BA5-4F64-85E9-71D1749D4870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9686E422-1BA5-4F64-85E9-71D1749D4870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9686E422-1BA5-4F64-85E9-71D1749D4870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9686E422-1BA5-4F64-85E9-71D1749D4870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C5F4E5-562C-424C-8B99-8C02EC5157B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C5F4E5-562C-424C-8B99-8C02EC5157B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C5F4E5-562C-424C-8B99-8C02EC5157B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C5F4E5-562C-424C-8B99-8C02EC5157B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6C58C9-30E9-4DEE-8278-03AE611D455C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6C58C9-30E9-4DEE-8278-03AE611D455C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6C58C9-30E9-4DEE-8278-03AE611D455C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6C58C9-30E9-4DEE-8278-03AE611D455C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB92ABE7-E991-44D1-87BE-EE9EE73397CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB92ABE7-E991-44D1-87BE-EE9EE73397CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB92ABE7-E991-44D1-87BE-EE9EE73397CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB92ABE7-E991-44D1-87BE-EE9EE73397CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D87A39-880E-4917-B6D7-37085B94D3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D87A39-880E-4917-B6D7-37085B94D3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D87A39-880E-4917-B6D7-37085B94D3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D87A39-880E-4917-B6D7-37085B94D3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{118D248B-81E9-4CB6-A028-573FE67A5A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118D248B-81E9-4CB6-A028-573FE67A5A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118D248B-81E9-4CB6-A028-573FE67A5A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118D248B-81E9-4CB6-A028-573FE67A5A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C6BBF07F-E135-4943-AB3D-F1A6F6E804B2} = {489F952E-462D-446C-8896-DB2D22F986C4}
+		{B8F7D349-40D6-412D-9A0D-8766A70857DA} = {C6BBF07F-E135-4943-AB3D-F1A6F6E804B2}
+		{43B3234D-6EAC-4E5C-8152-04B6224AB29E} = {0584D6B3-4D80-4E37-AB6E-BC3FE4F43BD5}
+		{4E5F87A1-F172-4C1C-90E1-698F635014AA} = {381EC89F-FFCD-4551-AFA4-7C5F9F4AF361}
+		{9686E422-1BA5-4F64-85E9-71D1749D4870} = {381EC89F-FFCD-4551-AFA4-7C5F9F4AF361}
+		{B0C5F4E5-562C-424C-8B99-8C02EC5157B8} = {381EC89F-FFCD-4551-AFA4-7C5F9F4AF361}
+		{CD2055E1-C153-4B30-8ED6-C57DAA06106D} = {381EC89F-FFCD-4551-AFA4-7C5F9F4AF361}
+		{2A6C58C9-30E9-4DEE-8278-03AE611D455C} = {CD2055E1-C153-4B30-8ED6-C57DAA06106D}
+		{CB92ABE7-E991-44D1-87BE-EE9EE73397CC} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+		{92D87A39-880E-4917-B6D7-37085B94D3E4} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+		{A2DCD4A5-6DCE-4DE8-A13F-52EAC01F3194} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+		{4958ABEB-07EE-4E08-BB04-2F0EB5188CD5} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+		{118D248B-81E9-4CB6-A028-573FE67A5A4E} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+		{CBEA335A-993B-4765-9CBE-36B8CBAFE8E9} = {2D864CAD-30C3-4C0C-B727-96D5FA9A252B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84D64E82-7FB4-4FDC-950C-1EEF6673A314}
+	EndGlobalSection
+EndGlobal

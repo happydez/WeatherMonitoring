@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>efd1b7f5-fb2d-48c2-a0bc-5010bff45de0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+	<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.7" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Microsoft.OpenApi" Version="1.6.15" />
+	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+	<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+	<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+	<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.6.2" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\WeatherMonitoring.Context.Migrations\WeatherMonitoring.Context.Migrations.PgSql\WeatherMonitoring.Context.Migrations.PgSql.csproj" />
+    <ProjectReference Include="..\..\..\Data\WeatherMonitoring.Context.Seeder\WeatherMonitoring.Context.Seeder.csproj" />
+    <ProjectReference Include="..\..\..\Data\WeatherMonitoring.Context\WeatherMonitoring.Context.csproj" />
+    <ProjectReference Include="..\..\..\Data\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Serivces.WeatherMonitoring\WeatherMonitoring.Services.WeatherMonitoring.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Services.Locations\WeatherMonitoring.Services.Locations.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Services.Logger\WeatherMonitoring.Services.Logger.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Services.Settings\WeatherMonitoring.Services.Settings.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Services.WeatherApi\WeatherMonitoring.Services.WeatherApi.csproj" />
+    <ProjectReference Include="..\..\..\Services\WeatherMonitoring.Services.Weathers\WeatherMonitoring.Services.Weathers.csproj" />
+    <ProjectReference Include="..\..\..\Shared\WeatherMonitoring.Common\WeatherMonitoring.Common.csproj" />
+  </ItemGroup>
+
+</Project>

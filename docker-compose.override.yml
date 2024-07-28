@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  weathermonitoring_pgadmin:
+    ports:
+      - "5050:80"
+    restart: always
+    networks:
+      - shared_weathermonitoring_net
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+
+  weathermonitoring_postgresql:
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
+    ports:
+      - "45432:5432"
+    networks:
+      - shared_weathermonitoring_net
+    volumes:      
+      - weathermonitoring-pgdata:/var/lib/postgresql/data
+
+  weathermonitoring_api:
+    ports:
+      - "10000:8080"
+    networks:
+      - shared_weathermonitoring_net
+    env_file:
+      - env.api
+    depends_on:
+      - weathermonitoring_postgresql
+      - weathermonitoring_pgadmin
+  
+  weathermonitoring_client:
+    ports:
+      - "3000:3000"
+    env_file:
+      - env.client
+    networks:
+      - shared_weathermonitoring_net
+    # volumes:
+    #   - ./client/weather-monitoring:/app
+    #   - /app/node_modules
+    depends_on:
+      - weathermonitoring_api
+
+volumes:
+  weathermonitoring-pgdata:
+
+networks:
+  shared_weathermonitoring_net:
+    name: net_weathermonitoring
+    driver: bridge

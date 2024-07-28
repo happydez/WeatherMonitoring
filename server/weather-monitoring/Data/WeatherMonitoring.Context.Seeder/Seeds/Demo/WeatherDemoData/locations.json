@@ -1,0 +1,119 @@
+[
+  {
+    "name": "Voronezh",
+    "region": "Voronezh",
+    "country": "Russia",
+    "lat": 51.67,
+    "lon": 39.17,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Moscow",
+    "region": "Moscow City",
+    "country": "Russia",
+    "lat": 55.75,
+    "lon": 37.62,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Tokyo",
+    "region": "Tokyo",
+    "country": "Japan",
+    "lat": 35.69,
+    "lon": 139.69,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Novovoronezh",
+    "region": "Voronezh",
+    "country": "Russia",
+    "lat": 51.32,
+    "lon": 39.22,
+    "active": false,
+    "included": true
+  },
+  {
+    "name": "London",
+    "region": "City of London, Greater London",
+    "country": "United Kingdom",
+    "lat": 51.52,
+    "lon": -0.11,
+    "active": false,
+    "included": true
+  },
+  {
+    "name": "Paris",
+    "region": "Ile-de-France",
+    "country": "France",
+    "lat": 48.87,
+    "lon": 2.33,
+    "active": false,
+    "included": true
+  },
+  {
+    "name": "Peking",
+    "region": "Beijing",
+    "country": "China",
+    "lat": 39.93,
+    "lon": 116.39,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Volgograd",
+    "region": "Volgograd",
+    "country": "Russia",
+    "lat": 48.8,
+    "lon": 44.59,
+    "active": false,
+    "included": true
+  },
+  {
+    "name": "Brasilia",
+    "region": "Distrito Federal",
+    "country": "Brazil",
+    "lat": -15.78,
+    "lon": -47.92,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Australind",
+    "region": "Western Australia",
+    "country": "Australia",
+    "lat": -33.27,
+    "lon": 115.72,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Berlin",
+    "region": "Berlin",
+    "country": "Germany",
+    "lat": 52.52,
+    "lon": 13.4,
+    "active": false,
+    "included": true
+  },
+  {
+    "name": "Amsterdam",
+    "region": "North Holland",
+    "country": "Netherlands",
+    "lat": 52.37,
+    "lon": 4.89,
+    "active": true,
+    "included": true
+  },
+  {
+    "name": "Lipetsk",
+    "region": "Lipetsk",
+    "country": "Russia",
+    "lat": 52.62,
+    "lon": 39.57,
+    "active": true,
+    "included": true
+  }
+]

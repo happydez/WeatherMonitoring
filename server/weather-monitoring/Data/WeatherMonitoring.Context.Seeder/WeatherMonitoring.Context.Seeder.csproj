@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherMonitoring.Context\WeatherMonitoring.Context.csproj" />
+    <ProjectReference Include="..\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Seeds\Demo\WeatherDemoData\locations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

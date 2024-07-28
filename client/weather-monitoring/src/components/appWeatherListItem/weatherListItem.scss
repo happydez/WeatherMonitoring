@@ -1,0 +1,60 @@
+@import '../../styles/variables.scss';
+
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px 30px;
+    margin: 20px 0px;
+}
+
+.weather {
+    &__item {
+        img {
+            height: 48px;
+            width: 48px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 5px 5px 20px rgba(32, 32, 32, 0.6);
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__city {
+        color: #161616;
+        font-size: 18px;
+        font-weight: normal;
+        padding: 0 15px 0 15px;
+        max-width: 480px;
+        line-height: 24px;
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__tracking {
+        font-size: 14px;
+        padding: 0 10px;
+        color: $grey;
+
+        &__active {
+            font-size: 14px;
+            font-weight: bold;
+            color: darkcyan;
+        }
+    }
+}
