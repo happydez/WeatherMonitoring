@@ -65,13 +65,6 @@ public class LocationService : ILocationService
         if (offest != null) locations = locations.Skip(offest.Value).ToList();
         if (limit != null) locations = locations.Take(limit.Value).ToList();
 
-        if (locations == null)
-        {
-            for (int i = 1; i <= 100; i++) Console.WriteLine("TRUE");
-
-            return [];
-        }
-
         var result = _mapper.Map<IEnumerable<LocationModel>>(locations);
 
         return result;
