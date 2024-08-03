@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WeatherMonitoring.Services.WeatherApi;
 
 namespace WeatherMonitoring.Context.Seeder;
 
@@ -22,8 +23,8 @@ public static class DbSeeder
         {
             await AddDemoData(serviceProvider);
         })
-            .GetAwaiter()
-            .GetResult();
+        .GetAwaiter()
+        .GetResult();
     }
 
     private static async Task AddDemoData(IServiceProvider serviceProvider)
@@ -33,7 +34,6 @@ public static class DbSeeder
         {
             return;
         }
-
 
         var settings = scope.ServiceProvider.GetService<DbSettings>();
         if (!(settings.Init?.AddDemoData ?? false))
@@ -48,7 +48,23 @@ public static class DbSeeder
             return;
         }
 
-        await context.Locations.AddRangeAsync(new DemoHelper().GetLocations);
+        if (await context.Weathers.AnyAsync())
+        {
+            return;
+        }
+
+        var locations = DemoHelper.GetLocations();
+        await context.Locations.AddRangeAsync(locations);
+        await context.SaveChangesAsync();
+
+        // Raw location initialization via weather api call
+        // var weathers = await DemoHelper.GetWeathers(serviceProvider);
+        // await context.Weathers.AddRangeAsync(weathers);
+
+        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            @"Seeds/Demo/WeatherDemoData", "weathers.csv");
+        
+        await DemoHelper.InitWeathersFromCsv(serviceProvider, path);
 
         await context.SaveChangesAsync();
     }

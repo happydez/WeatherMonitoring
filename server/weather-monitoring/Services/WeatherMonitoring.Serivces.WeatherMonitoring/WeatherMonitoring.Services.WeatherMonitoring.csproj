@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj" />
     <ProjectReference Include="..\WeatherMonitoring.Services.Locations\WeatherMonitoring.Services.Locations.csproj" />
+    <ProjectReference Include="..\WeatherMonitoring.Services.Logger\WeatherMonitoring.Services.Logger.csproj" />
     <ProjectReference Include="..\WeatherMonitoring.Services.WeatherApi\WeatherMonitoring.Services.WeatherApi.csproj" />
   </ItemGroup>
 

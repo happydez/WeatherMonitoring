@@ -5,6 +5,7 @@ import WeatherList from "../appWeatherList/WeatherList";
 import Pagination from "../appPagination/Pagination";
 import AddCityModal from '../appAddCityModal/AddCityModal';
 import EditCityModal from '../appEditCityModal/EdityCityModal';
+import WeatherDetailsModal from '../appWeatherDetailsModal/WeatherDetailsModal';
 import Loader from '../appLoader/Loader';
 
 import WeatherService from '../../services/WeatherService';
@@ -18,7 +19,9 @@ const App = () => {
     const [showAddModal, setShowAddModal] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedCity, setSelectedCity] = useState(null);
-    const citiesPerPage = 5;
+    const [showWeatherDetailsModal, setShowWeatherDetailsModal] = useState(false);
+    const [showEditCityModal, setShowEditCityModal] = useState(false);
+    const itemsPerPage = 5;
 
     const weatherService = useMemo(() => new WeatherService(), []);
 
@@ -26,11 +29,12 @@ const App = () => {
         const fetchCities = async () => {
             try {
                 const data = await weatherService.getAllIncludedLocations();
-                const formattedCities = data.map(({ id, name, region, country, lat, lon, active }) => ({
+                const formattedCities = data.map(({ id, name, region, country, tzId, lat, lon, active }) => ({
                     id,
                     country,
                     state: region,
                     city: name,
+                    tzId,
                     lat,
                     lon,
                     tracking: active,
@@ -47,11 +51,11 @@ const App = () => {
     }, [weatherService]);
 
     useEffect(() => {
-        const totalPages = Math.max(Math.ceil(cities.length / citiesPerPage), 1);
+        const totalPages = Math.max(Math.ceil(cities.length / itemsPerPage), 1);
         if (currentPage > totalPages) {
             setCurrentPage(totalPages);
         }
-    }, [cities, currentPage, citiesPerPage]);
+    }, [cities, currentPage, itemsPerPage]);
 
     const addCity = useCallback((city) => {
         setCities((prevCities) => [city, ...prevCities]);
@@ -80,11 +84,23 @@ const App = () => {
 
     const filteredCities = searchCities(searchTerm);
 
-    const indexOfLastCity = currentPage * citiesPerPage;
-    const indexOfFirstCity = indexOfLastCity - citiesPerPage;
+    const indexOfLastCity = currentPage * itemsPerPage;
+    const indexOfFirstCity = indexOfLastCity - itemsPerPage;
     const currentCities = filteredCities.slice(indexOfFirstCity, indexOfLastCity);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const onShowWeatherDetails = (city) => {
+        setSelectedCity(city);
+        setShowWeatherDetailsModal(true);
+        setShowEditCityModal(false);
+    };
+
+    const onEditCity = (city) => {
+        setSelectedCity(city);
+        setShowEditCityModal(true);
+        setShowWeatherDetailsModal(false);
+    };
 
     if (isLoading) {
         return (
@@ -103,15 +119,16 @@ const App = () => {
                         cities={currentCities}
                         deleteCity={deleteCity}
                         isSearching={searchTerm.length > 0}
-                        onEditCity={setSelectedCity}
+                        onEditCity={onEditCity}
+                        onShowWeatherDetails={onShowWeatherDetails}
                         weatherService={weatherService}
                     />
                 </div>
                 <section className="pagination-container">
-                    {filteredCities.length > 5 && (
+                    {filteredCities.length > itemsPerPage && (
                         <Pagination 
-                            totalCities={filteredCities.length}
-                            citiesPerPage={citiesPerPage}
+                            totalItems={filteredCities.length}
+                            itemsPerPage={itemsPerPage}
                             currentPage={currentPage}
                             paginate={paginate}
                         />
@@ -130,11 +147,18 @@ const App = () => {
                     weatherService={weatherService}
                 />
             )}
-            {selectedCity && (
+            {showEditCityModal && selectedCity && (
                 <EditCityModal
                     city={selectedCity}
-                    onClose={() => setSelectedCity(null)}
+                    onClose={() => setShowEditCityModal(false)}
                     onToggleTracking={toggleTracking}
+                    weatherService={weatherService}
+                />
+            )}
+            {showWeatherDetailsModal && selectedCity && (
+                <WeatherDetailsModal
+                    city={selectedCity}
+                    onClose={() => setShowWeatherDetailsModal(false)}
                     weatherService={weatherService}
                 />
             )}

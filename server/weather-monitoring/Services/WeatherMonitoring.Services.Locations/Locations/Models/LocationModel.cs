@@ -11,6 +11,7 @@ public class LocationModel
     public string Country { get; set; }
     public double Lat { get; set; }
     public double Lon { get; set; }
+    public string TzId { get; set; }
     public bool Active { get; set; }
     public bool Included { get; set; }
 }
@@ -26,6 +27,7 @@ public class LocationModelProfile : Profile
             .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
             .ForMember(dest => dest.Lat, opt => opt.MapFrom(src => src.Lat))
             .ForMember(dest => dest.Lon, opt => opt.MapFrom(src => src.Lon))
+            .ForMember(dest => dest.TzId, opt => opt.MapFrom(src => src.TzId))
             .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
             .ForMember(dest => dest.Included, opt => opt.MapFrom(src => src.Included)
             );

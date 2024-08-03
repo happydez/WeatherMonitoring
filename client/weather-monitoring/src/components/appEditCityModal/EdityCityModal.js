@@ -25,8 +25,14 @@ const EditCityModal = ({ city, onClose, onToggleTracking, weatherService  }) => 
         return info;
     };
 
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal">
                 <div className="modal-header">
                     <h2>{renderCityInfo()}</h2>

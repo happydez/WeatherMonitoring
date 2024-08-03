@@ -20,6 +20,16 @@ class WeatherService {
         return await this.getResource(`${this._apiBase}search?q=${searchTerm}`);
     }
 
+    getWeathers = async (locationId, limit = null, offset = null, desc = null, date1 = null, date2 = null) => {
+        let url = `${this._apiBase}weathers/${locationId}?`;
+        if (limit) url += `limit=${limit}&`;
+        if (offset) url += `offset=${offset}&`;
+        if (desc) url += `desc=${desc}&`;
+        if (date1) url += `dt1=${date1}T00:00:00Z&`;
+        if (date2) url += `dt2=${date2}T23:00:00Z&`;
+        return await this.getResource(url);
+    }
+
     updateResourse = async (url, body) => {
         try {
             await fetch(url, {

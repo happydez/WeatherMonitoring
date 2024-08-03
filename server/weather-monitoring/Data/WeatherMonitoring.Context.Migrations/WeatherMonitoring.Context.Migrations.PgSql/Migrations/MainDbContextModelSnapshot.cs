@@ -69,6 +69,11 @@ namespace WeatherMonitoring.Context.Migrations.PgSql.Migrations
                         .HasColumnType("character varying(48)")
                         .HasColumnName("region");
 
+                    b.Property<string>("TzId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("tz_id");
+
                     b.Property<Guid>("Uid")
                         .HasColumnType("uuid");
 
@@ -91,6 +96,11 @@ namespace WeatherMonitoring.Context.Migrations.PgSql.Migrations
                     b.Property<int>("ConditionCode")
                         .HasColumnType("integer")
                         .HasColumnName("c_code");
+
+                    b.Property<string>("ConditionText")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("c_text");
 
                     b.Property<int>("Humidity")
                         .HasColumnType("integer")
@@ -115,9 +125,6 @@ namespace WeatherMonitoring.Context.Migrations.PgSql.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("temp_c");
 
-                    b.Property<Guid>("Uid")
-                        .HasColumnType("uuid");
-
                     b.Property<double>("WindSpeedKph")
                         .HasColumnType("double precision")
                         .HasColumnName("wind_kph");
@@ -125,9 +132,6 @@ namespace WeatherMonitoring.Context.Migrations.PgSql.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
-
-                    b.HasIndex("Uid")
-                        .IsUnique();
 
                     b.ToTable("Weather", "wmapp");
                 });

@@ -5,6 +5,7 @@
     "country": "Russia",
     "lat": 51.67,
     "lon": 39.17,
+    "tzid": "Europe/Moscow",
     "active": true,
     "included": true
   },
@@ -14,6 +15,7 @@
     "country": "Russia",
     "lat": 55.75,
     "lon": 37.62,
+    "tzid": "Europe/Moscow",
     "active": true,
     "included": true
   },
@@ -23,6 +25,7 @@
     "country": "Japan",
     "lat": 35.69,
     "lon": 139.69,
+    "tzid": "Asia/Tokyo",
     "active": true,
     "included": true
   },
@@ -32,6 +35,7 @@
     "country": "Russia",
     "lat": 51.32,
     "lon": 39.22,
+    "tzid": "Europe/Moscow",
     "active": false,
     "included": true
   },
@@ -41,6 +45,7 @@
     "country": "United Kingdom",
     "lat": 51.52,
     "lon": -0.11,
+    "tzid": "Europe/London",
     "active": false,
     "included": true
   },
@@ -50,6 +55,7 @@
     "country": "France",
     "lat": 48.87,
     "lon": 2.33,
+    "tzid": "Europe/Paris",
     "active": false,
     "included": true
   },
@@ -59,6 +65,7 @@
     "country": "China",
     "lat": 39.93,
     "lon": 116.39,
+    "tzid": "Asia/Shanghai",
     "active": true,
     "included": true
   },
@@ -68,6 +75,7 @@
     "country": "Russia",
     "lat": 48.8,
     "lon": 44.59,
+    "tzid": "Europe/Volgograd",
     "active": false,
     "included": true
   },
@@ -77,6 +85,7 @@
     "country": "Brazil",
     "lat": -15.78,
     "lon": -47.92,
+    "tzid": "America/Sao_Paulo",
     "active": true,
     "included": true
   },
@@ -86,6 +95,7 @@
     "country": "Australia",
     "lat": -33.27,
     "lon": 115.72,
+    "tzid": "Australia/Perth",
     "active": true,
     "included": true
   },
@@ -95,6 +105,7 @@
     "country": "Germany",
     "lat": 52.52,
     "lon": 13.4,
+    "tzid": "Europe/Berlin",
     "active": false,
     "included": true
   },
@@ -104,15 +115,7 @@
     "country": "Netherlands",
     "lat": 52.37,
     "lon": 4.89,
-    "active": true,
-    "included": true
-  },
-  {
-    "name": "Lipetsk",
-    "region": "Lipetsk",
-    "country": "Russia",
-    "lat": 52.62,
-    "lon": 39.57,
+    "tzid": "Europe/Amsterdam",
     "active": true,
     "included": true
   }

@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace WeatherMonitoring.Context;
 
-public class LocationConfiguration : IEntityTypeConfiguration<Location>
+public class LocationConfiguration : BaseEntityConfiguration<Location>
 {
-    public void Configure(EntityTypeBuilder<Location> entity)
+    public override void Configure(EntityTypeBuilder<Location> entity)
     {
+        base.Configure(entity);
+
         entity.HasKey(p => p.Id);
         entity.ToTable("Location", schema: "wmapp");
 
@@ -18,10 +20,14 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         entity.Property(p => p.Lat).IsRequired().HasColumnName("lat");
         entity.Property(p => p.Lon).IsRequired().HasColumnName("lon");
 
+        entity.Property(p => p.TzId).IsRequired().HasColumnName("tz_id");
+
         entity.Property(p => p.Active).HasColumnName("active").HasDefaultValue(true);
         entity.Property(p => p.Included).HasColumnName("included").HasDefaultValue(false);
 
         entity.HasMany(l => l.Weathers).WithOne(w => w.Location)
             .HasForeignKey(w => w.LocationId);
+
+        entity.HasIndex(p => p.Uid).IsUnique();
     }
 }

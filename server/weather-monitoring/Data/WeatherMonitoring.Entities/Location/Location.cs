@@ -7,6 +7,7 @@ public class Location : BaseEntity
     public string Country { get; set; }
     public double Lat { get; set; }
     public double Lon { get; set; }
+    public string TzId { get; set; }
     public bool Active { get; set; }
     public bool Included { get; set; }
 

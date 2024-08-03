@@ -8,7 +8,7 @@ public class ParamsValidator : IParamsValidator
     private const int offsetMinBound = 0;
     private const int offsetMaxBound = 1000;
 
-    private const int limitMinBound = 0;
+    private const int limitMinBound = 1;
     private const int limitMaxBound = 1000;
 
     private readonly IValidator<int> _offsetValidator;

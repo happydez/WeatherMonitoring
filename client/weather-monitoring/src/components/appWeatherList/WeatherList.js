@@ -2,7 +2,7 @@ import React from 'react';
 import WeatherListItem from '../appWeatherListItem/WeatherListItem';
 import './weatherList.scss';
 
-const WeatherList = ({ cities, editCity, deleteCity, isSearching, onEditCity, weatherService }) => {
+const WeatherList = ({ cities, deleteCity, isSearching, onEditCity, onShowWeatherDetails, weatherService  }) => {
     return (
         <div className="weather__list">
             {cities.length === 0 ? (
@@ -16,9 +16,9 @@ const WeatherList = ({ cities, editCity, deleteCity, isSearching, onEditCity, we
                             key={city.id}
                             index={index}
                             city={city}
-                            editCity={editCity}
                             deleteCity={deleteCity}
                             onEditCity={onEditCity}
+                            onShowWeatherDetails={onShowWeatherDetails}
                             weatherService={weatherService}
                         />
                     ))}

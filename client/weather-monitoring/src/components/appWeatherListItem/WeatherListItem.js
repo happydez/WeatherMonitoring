@@ -1,7 +1,7 @@
 import React from 'react';
 import './weatherListItem.scss';
 
-const WeatherListItem = ({ index, city, deleteCity, onEditCity, weatherService }) => {
+const WeatherListItem = ({ index, city, deleteCity, onEditCity, onShowWeatherDetails, weatherService }) => {
     const renderCityInfo = () => {
         const { country, state, city: cityName } = city;
         let info = country;
@@ -17,13 +17,19 @@ const WeatherListItem = ({ index, city, deleteCity, onEditCity, weatherService }
         return info;
     };
 
-    const onDeleteCity = () => {
+    const onDeleteCity = (e) => {
+        e.stopPropagation();
         weatherService.updateLocation(city.id, false, false);
         deleteCity(index);
     };
 
+    const handleEditClick = (e) => {
+        e.stopPropagation();
+        onEditCity(city);
+    };
+
     return (
-        <li className="weather__item">
+        <li className="weather__item" onClick={() => onShowWeatherDetails(city)}>
             <div className="weather__info">
                 <div className="weather__city">
                     {renderCityInfo()}
@@ -35,7 +41,7 @@ const WeatherListItem = ({ index, city, deleteCity, onEditCity, weatherService }
                 </div>
                 <button 
                     className='control control__settings' 
-                    onClick={() => onEditCity(city)}
+                    onClick={handleEditClick}
                 >
                     <i className="fa fa-wrench"></i>
                 </button>

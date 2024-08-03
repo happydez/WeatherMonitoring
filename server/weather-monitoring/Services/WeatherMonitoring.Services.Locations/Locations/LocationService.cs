@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using WeatherMonitoring.Context;
 using WeatherMonitoring.Context.Entities;
+using WeatherMonitoring.Services.WeatherApi;
 
 namespace WeatherMonitoring.Services.Locations;
 
 public class LocationService : ILocationService
 {
     private readonly IDbContextFactory<MainDbContext> _dbContextFactory;
+    private readonly IWeatherApi _weatherApi;
     private readonly IMapper _mapper;
 
-    public LocationService(IDbContextFactory<MainDbContext> dbContextFactory, IMapper mapper)
+    public LocationService(IDbContextFactory<MainDbContext> dbContextFactory, IWeatherApi weatherApi, IMapper mapper)
     {
         _dbContextFactory = dbContextFactory;
+        _weatherApi = weatherApi;
         _mapper = mapper;
     }
 
@@ -25,16 +28,25 @@ public class LocationService : ILocationService
             && loc.Region == model.Region
             && loc.Country == model.Country);
 
-        location = (location is null) ? _mapper.Map<Location>(model) : location;
+        bool inDB = location is not null;
+
+        location = (inDB) ? location : _mapper.Map<Context.Entities.Location>(model);
         location.Included = true;
         location.Active = model.Active;
 
-        if (location is not null)
+        if (inDB)
         {
             context.Locations.Update(location);
         }
         else
         {
+            var waq = WeatherApiQuery.CreateBuilder(model.Name)
+                        .WithRegion(model.Region).WithCountry(model.Country).Build();
+
+            var response = await _weatherApi.GetWeatherDataAsync(waq);
+
+            location.TzId = response.Location.TzId;
+
             await context.Locations.AddAsync(location);
         }
 

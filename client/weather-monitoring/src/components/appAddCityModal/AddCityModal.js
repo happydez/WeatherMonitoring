@@ -85,8 +85,14 @@ const AddCityModal = ({ onHide, onAddCity, existingCities, weatherService }) => 
     onHide();
   };
 
+  const handleOverlayClick = (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+      handleClose();
+    }
+  };
+
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal">
         <div className="modal-header">
           <h2>Add Location</h2>

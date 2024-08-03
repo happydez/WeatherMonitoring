@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\WeatherMonitoring.Services.WeatherApi\WeatherMonitoring.Services.WeatherApi.csproj" />
+    <ProjectReference Include="..\..\Shared\WeatherMonitoring.Common\WeatherMonitoring.Common.csproj" />
     <ProjectReference Include="..\WeatherMonitoring.Context\WeatherMonitoring.Context.csproj" />
     <ProjectReference Include="..\WeatherMonitoring.Entities\WeatherMonitoring.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Seeds\Demo\WeatherDemoData\locations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Seeds\Demo\WeatherDemoData\weathers.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

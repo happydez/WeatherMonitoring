@@ -15,6 +15,23 @@
         background-color: $main-color;
     }
 
+    &.button__show {
+        margin: 0 10px;
+        padding: 4px;
+        min-width: 84px;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #4caf50;
+            color: #fff;
+        }
+    }
+
     &.button__search {
         cursor: default;
         background: transparent;

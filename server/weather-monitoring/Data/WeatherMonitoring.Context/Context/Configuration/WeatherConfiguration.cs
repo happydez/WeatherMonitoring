@@ -4,10 +4,12 @@ using WeatherMonitoring.Context.Entities;
 
 namespace WeatherMonitoring.Context;
 
-public class WeatherConfiguration : IEntityTypeConfiguration<Weather>
+public class WeatherConfiguration : BaseEntityConfiguration<Weather>
 {
-    public void Configure(EntityTypeBuilder<Weather> entity)
+    public override void Configure(EntityTypeBuilder<Weather> entity)
     {
+        base.Configure(entity);
+
         entity.HasKey(p => p.Id);
         entity.ToTable("Weather", schema: "wmapp");
 
@@ -16,8 +18,11 @@ public class WeatherConfiguration : IEntityTypeConfiguration<Weather>
         entity.Property(p => p.WindSpeedKph).IsRequired().HasColumnName("wind_kph");
         entity.Property(p => p.TemperatureCelsius).IsRequired().HasColumnName("temp_c");
         entity.Property(p => p.ConditionCode).IsRequired().HasColumnName("c_code");
+        entity.Property(p => p.ConditionText).IsRequired().HasColumnName("c_text");
 
         entity.Property(p => p.LastUpdatedEpoch).IsRequired().HasColumnName("lastup_epoch");
         entity.Property(p => p.LastUpdated).IsRequired().HasColumnName("lastup");
+
+        entity.Ignore(p => p.Uid);
     }
 }

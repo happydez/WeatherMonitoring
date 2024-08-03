@@ -18,4 +18,7 @@ public class WeatherApiSearchResponse
 
     [JsonProperty("lon")]
     public double Lon { get; set; }
+
+    [JsonProperty("tz_id")]
+    public string TzId { get; set; }
 }

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using WeatherMonitoring.Api;
 using WeatherMonitoring.Api.Configuration;
 using WeatherMonitoring.Context;
@@ -34,6 +33,8 @@ app.UseAppControllers();
 
 DbInitializer.Execute(app.Services);
 DbSeeder.Execute(app.Services);
+
+WeatherMonitoring.Services.WeatherMonitoring.WeatherMonitoring.Execute(app.Services);
 
 var logger = app.Services.GetRequiredService<IAppLogger>();
 

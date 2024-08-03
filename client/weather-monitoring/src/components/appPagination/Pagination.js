@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './appPagination.scss';
 
-const Pagination = ({ totalCities, citiesPerPage, currentPage, paginate }) => {
+const Pagination = ({ totalItems, itemsPerPage, currentPage, paginate }) => {
   const [visiblePages, setVisiblePages] = useState([]);
-  const totalPages = Math.max(Math.ceil(totalCities / citiesPerPage), 1);
+  // const [inputPage, setInputPage] = useState(currentPage);
+  const totalPages = Math.max(Math.ceil(totalItems / itemsPerPage), 1);
 
   const updateVisiblePages = useCallback((newCurrentPage) => {
     let newVisiblePages = [];
@@ -38,6 +39,7 @@ const Pagination = ({ totalCities, citiesPerPage, currentPage, paginate }) => {
   const handlePageChange = (pageNumber) => {
     paginate(pageNumber);
     updateVisiblePages(pageNumber);
+    // setInputPage(pageNumber);
   };
 
   const handlePrevClick = () => {
@@ -52,9 +54,37 @@ const Pagination = ({ totalCities, citiesPerPage, currentPage, paginate }) => {
     }
   };
 
+  const handleFirstClick = () => {
+    handlePageChange(1);
+  };
+
+  const handleLastClick = () => {
+    handlePageChange(totalPages);
+  };
+
+  // const handleInputChange = (e) => {
+  //   const value = e.target.value;
+  //   if (value === '' || (Number(value) > 0 && Number(value) <= totalPages)) {
+  //     setInputPage(value);
+  //   }
+  // };
+
+  // const handleInputBlur = () => {
+  //   if (inputPage !== '' && Number(inputPage) !== currentPage) {
+  //     handlePageChange(Number(inputPage));
+  //   } else {
+  //     setInputPage(currentPage);
+  //   }
+  // };
+
   return (
     <nav>
       <ul className="pagination">
+        <li className={`page-item arrow ${currentPage === 1 ? 'disabled' : ''}`}>
+          <button onClick={handleFirstClick} className="page-link">
+            &laquo;&laquo;
+          </button>
+        </li>
         <li className={`page-item arrow ${currentPage === 1 ? 'disabled' : ''}`}>
           <button onClick={handlePrevClick} className="page-link">
             &laquo;
@@ -72,6 +102,22 @@ const Pagination = ({ totalCities, citiesPerPage, currentPage, paginate }) => {
             &raquo;
           </button>
         </li>
+        <li className={`page-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}>
+          <button onClick={handleLastClick} className="page-link">
+            &raquo;&raquo;
+          </button>
+        </li>
+        {/* <li className="page-item">
+          <input
+            type="number"
+            value={inputPage}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            className="page-input"
+            min="1"
+            max={totalPages}
+          />
+        </li> */}
       </ul>
     </nav>
   );

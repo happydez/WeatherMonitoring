@@ -46,23 +46,14 @@ public class CurrentWeather
     [JsonProperty("temp_c")]
     public double TemperatureCelsius { get; set; }
 
-    // [JsonProperty("temp_f")]
-    // public double TemperatureFahrenheit { get; set; }
-
     [JsonProperty("humidity")]
     public int Humidity { get; set; }
-
-    // [JsonProperty("pressure_mb")]
-    // public double PressureMb { get; set; }
 
     [JsonProperty("pressure_in")]
     public double PressureIn { get; set; }
 
     [JsonProperty("wind_kph")]
     public double WindSpeedKph { get; set; }
-
-    // [JsonProperty("wind_mph")]
-    // public double WindSpeedMph { get; set; }
 
     [JsonProperty("last_updated_epoch")]
     public long LastUpdatedEpoch { get; set; }

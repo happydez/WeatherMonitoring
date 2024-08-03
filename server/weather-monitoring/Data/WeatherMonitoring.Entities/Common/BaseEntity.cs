@@ -7,7 +7,6 @@ namespace WeatherMonitoring.Context.Entities;
 /// <summary>
 /// Base Entity
 /// </summary>
-[Index("Uid", IsUnique = true)]
 public abstract class BaseEntity
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
