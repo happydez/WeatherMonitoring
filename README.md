@@ -16,5 +16,5 @@ cd .\WeatherMonitoring
 
 ### Шаг 3: Запустите приложение с помощью Docker Compose
 ```bash
-docker-compose up
+docker-compose up --build
 ```
