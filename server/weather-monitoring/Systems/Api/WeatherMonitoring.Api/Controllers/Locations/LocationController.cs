@@ -5,6 +5,8 @@ using WeatherMonitoring.Api.Controllers.Locations;
 using WeatherMonitoring.Api.Controllers.Locations.Models;
 using WeatherMonitoring.Common.ParamsValidator;
 using WeatherMonitoring.Services.Locations;
+using WeatherMonitoring.Services.WeatherApi;
+using WeatherMonitoring.Services.Weathers;
 
 namespace WeatherMonitoring.Api.Controllers;
 
@@ -15,12 +17,21 @@ namespace WeatherMonitoring.Api.Controllers;
 public class LocationsController : ControllerBase
 {
     private readonly ILocationService _locationService;
+    private readonly IWeatherService _weatherService;
+    private readonly IWeatherApi _weatherApi;
     private readonly IParamsValidator _paramsValidator;
     private readonly IMapper _mapper;
 
-    public LocationsController(ILocationService locationService, IParamsValidator paramsValidator, IMapper mapper)
+    public LocationsController(
+        ILocationService locationService,
+        IWeatherService weatherService,
+        IWeatherApi weatherApi,
+        IParamsValidator paramsValidator,
+        IMapper mapper)
     {
         _locationService = locationService;
+        _weatherService = weatherService;
+        _weatherApi = weatherApi;
         _paramsValidator = paramsValidator;
         _mapper = mapper;
     }
@@ -61,6 +72,16 @@ public class LocationsController : ControllerBase
         var location = _mapper.Map<CreateLocationModel>(model);
 
         var result = await _locationService.Create(location);
+
+        var waq = WeatherApiQuery.CreateBuilder(result.Name)
+                        .WithRegion(result.Region).WithRegion(result.Country).Build();
+
+        var weatherData = await _weatherApi.GetWeatherDataAsync(waq);
+
+        var weatherModel = _mapper.Map<CreateWeatherModel>(weatherData);
+        weatherModel.LocationId = result.Id;
+
+        await _weatherService.Create(weatherModel);
 
         return Ok(result);
     }

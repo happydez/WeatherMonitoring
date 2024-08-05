@@ -38,8 +38,8 @@ const WeatherDetailsModal = ({ city, onClose, weatherService }) => {
 
     const getUtcOffsetForTimeZone = (timeZoneId) => {
         const now = moment.tz(timeZoneId);
-        const offset = now.utcOffset() / 60; // Получаем смещение в часах
-        return offset;
+        const offset = now.utcOffset() / 60;
+        return `${offset < 0 ? '' : '+'}${offset}`;
     };
 
     const handleParameterChange = (param) => {
@@ -171,80 +171,101 @@ const WeatherDetailsModal = ({ city, onClose, weatherService }) => {
         }
     };
 
+    const renderCityInfo = () => {
+        const { country, state, city: cityName } = city;
+        let info = country;
+
+        if (state) {
+            info += `, ${state}`;
+        }
+
+        if (cityName) {
+            info += `, ${cityName}`;
+        }
+
+        return info;
+    };
+
+
     return (
         <div className="weather-details-modal-overlay" onClick={handleOverlayClick}>
             <div className="weather-details-modal">
                 <div className="weather-details-modal-header">
                     <div className="weather-details-modal-header-left">
-                        <h2>{`${city.country}, ${city.state}, ${city.city}`}</h2>
+                        <h2>{renderCityInfo()}</h2>
                         <div><CurrentTime timeZone={city.tzId} /></div>
                     </div>
                     <button onClick={onClose} className="weather-details-modal-close-button">&times;</button>
                 </div>
 
-                {isLoading || !weatherData ? (
+                {isLoading ? (
                      <Loader />
-                ) : (
-                    <>
-                    <div className="weather-details-modal-view-selector">
-                        <button className={view === 'current' ? 'active' : ''} onClick={() => setView('current')}>Current state</button>
-                        <button className={view === 'changes' ? 'active' : ''} onClick={() => setView('changes')}>Last changes</button>
-                    </div>
-                    <div className="weather-details-modal-content">
-                        {view === 'current' ? (
-                            <div className="weather-details">
-                                <p><span>Weather conditions:</span> {weatherData.conditionText}</p>
-                                <p><span>Date of last update:</span> <i className="fa fa-clock-o"></i> {`${formatDate(weatherData.lastUpdated)} (UTC+${getUtcOffsetForTimeZone(city.tzId)})`}</p>
-                                <div className="weather-details-modal-stats">
-                                    <div>
-                                        <p className='weather weather__temperatureCelsius'>Temperature</p>
-                                        <p className='weather weather__temperatureCelsius'>{weatherData.temperatureCelsius}°C</p>
-                                    </div>
-                                    <div>
-                                        <p className='weather weather__pressureIn'>Pressure</p>
-                                        <p className='weather weather__pressureIn'>{weatherData.pressureIn} mm Hg</p>
-                                    </div>
-                                    <div>
-                                        <p className='weather weather__humidity'>Humidity</p>
-                                        <p className='weather weather__humidity'>{weatherData.humidity}%</p>
-                                    </div>
-                                    <div>
-                                        <p className='weather weather__windSpeedKph'>Wind speed</p>
-                                        <p className='weather weather__windSpeedKph'>{weatherData.windSpeedKph} km/h</p>
+                ) : !weatherData ? (
+                    <p className="no-weather">
+                        Weather not found
+                    </p>
+                    ) : (
+                        <>
+                        <div className="weather-details-modal-view-selector">
+                            <button className={view === 'current' ? 'active' : ''} onClick={() => setView('current')}>Current state</button>
+                            <button className={view === 'changes' ? 'active' : ''} onClick={() => setView('changes')}>Last changes</button>
+                        </div>
+                        <div className="weather-details-modal-content">
+                            {view === 'current' ? (
+                                <div className="weather-details">
+                                    <p><span>Weather conditions:</span> {weatherData.conditionText}</p>
+                                    <p><span>Date of last update:</span> <i className="fa fa-clock-o"></i> {`${formatDate(weatherData.lastUpdated)} (UTC${getUtcOffsetForTimeZone(city.tzId)})`}</p>
+                                    <div className="weather-details-modal-stats">
+                                        <div>
+                                            <p className='weather weather__temperatureCelsius'>Temperature</p>
+                                            <p className='weather weather__temperatureCelsius'>{weatherData.temperatureCelsius}°C</p>
+                                        </div>
+                                        <div>
+                                            <p className='weather weather__pressureIn'>Pressure</p>
+                                            <p className='weather weather__pressureIn'>{weatherData.pressureIn} mm Hg</p>
+                                        </div>
+                                        <div>
+                                            <p className='weather weather__humidity'>Humidity</p>
+                                            <p className='weather weather__humidity'>{weatherData.humidity}%</p>
+                                        </div>
+                                        <div>
+                                            <p className='weather weather__windSpeedKph'>Wind speed</p>
+                                            <p className='weather weather__windSpeedKph'>{weatherData.windSpeedKph} km/h</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className="weather-details-changes">
-                                {errorMessage && <p className="error-message error-message-weather-details">{errorMessage}</p>}
-                                <div className="weather-details-modal-date-picker">
-                                    <span>Period</span>
-                                    <input type="date" value={startDate} onChange={(e) => handleDateChange(e, 'start')} />
-                                    <span>-</span>
-                                    <input type="date" value={endDate} onChange={(e) => handleDateChange(e, 'end')} />
-                                    <button className='button button__show' onClick={handleShowChanges}>Show</button>
-                                </div>
-                                <div className="weather-details-modal-parameter-selector">
-                                    <button className={selectedParameter === 'all' ? 'active' : ''} onClick={() => handleParameterChange('all')}>All</button>
-                                    <button className={selectedParameter === 'temperature' ? 'active' : ''} onClick={() => handleParameterChange('temperature')}>Temperature</button>
-                                    <button className={selectedParameter === 'humidity' ? 'active' : ''} onClick={() => handleParameterChange('humidity')}>Humidity</button>
-                                    <button className={selectedParameter === 'pressure' ? 'active' : ''} onClick={() => handleParameterChange('pressure')}>Pressure</button>
-                                    <button className={selectedParameter === 'windSpeed' ? 'active' : ''} onClick={() => handleParameterChange('windSpeed')}>Wind speed</button>
-                                </div>
-                                <div className="weather-details-modal-flex-container">
-                                    <div className="weather-details-modal-chart-container">
-                                        <Line data={chartData} options={chartOptions} />
+                            ) : (
+                                <div className="weather-details-changes">
+                                    {errorMessage && <p className="error-message error-message-weather-details">{errorMessage}</p>}
+                                    <div className="weather-details-modal-date-picker">
+                                        <span>Period</span>
+                                        <input type="date" value={startDate} onChange={(e) => handleDateChange(e, 'start')} />
+                                        <span>-</span>
+                                        <input type="date" value={endDate} onChange={(e) => handleDateChange(e, 'end')} />
+                                        <button className='button button__show' onClick={handleShowChanges}>Show</button>
                                     </div>
-                                    <WeatherChangesTable 
-                                        weatherChanges={filteredChanges} 
-                                        selectedParameter={selectedParameter}
-                                    />
+                                    <div className="weather-details-modal-parameter-selector">
+                                        <button className={selectedParameter === 'all' ? 'active' : ''} onClick={() => handleParameterChange('all')}>All</button>
+                                        <button className={selectedParameter === 'temperature' ? 'active' : ''} onClick={() => handleParameterChange('temperature')}>Temperature</button>
+                                        <button className={selectedParameter === 'humidity' ? 'active' : ''} onClick={() => handleParameterChange('humidity')}>Humidity</button>
+                                        <button className={selectedParameter === 'pressure' ? 'active' : ''} onClick={() => handleParameterChange('pressure')}>Pressure</button>
+                                        <button className={selectedParameter === 'windSpeed' ? 'active' : ''} onClick={() => handleParameterChange('windSpeed')}>Wind speed</button>
+                                    </div>
+                                    <div className="weather-details-modal-flex-container">
+                                        <div className="weather-details-modal-chart-container">
+                                            <Line data={chartData} options={chartOptions} />
+                                        </div>
+                                        <WeatherChangesTable 
+                                            weatherChanges={filteredChanges} 
+                                            selectedParameter={selectedParameter}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                    </>  
-                )}
+                            )}
+                        </div>
+                        </>  
+                    )
+                }
                 <div className="weather-details-modal-footer">
                     <button onClick={onClose} className="button button__modal button__close">Close</button>
                 </div>  

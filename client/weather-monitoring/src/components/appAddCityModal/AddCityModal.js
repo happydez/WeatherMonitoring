@@ -58,6 +58,7 @@ const AddCityModal = ({ onHide, onAddCity, existingCities, weatherService }) => 
             country: response.country,
             state: response.region,
             city: response.name,
+            tzId: response.tzId,
             lat: response.lat,
             lon: response.lon,
             tracking: response.active,
