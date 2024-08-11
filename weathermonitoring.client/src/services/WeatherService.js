@@ -1,5 +1,5 @@
 class WeatherService {
-    _port = 5000;
+    _port = 10000;
     _apiBase = `http://localhost:${this._port}/api/v1/`;
 
     getResource = async (url) => {
