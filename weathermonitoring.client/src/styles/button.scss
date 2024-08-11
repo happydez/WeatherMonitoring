@@ -1,0 +1,139 @@
+@import './variables';
+
+.button {
+    cursor: pointer;
+    transition: 1.5s font-weight font-size;
+
+    &.button__add {
+        min-width: 128px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+        border: none;
+        border-radius: 6px;
+        background-color: $main-color;
+    }
+
+    &.button__show {
+        margin: 0 10px;
+        padding: 4px;
+        min-width: 84px;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #4caf50;
+            color: #fff;
+        }
+    }
+
+    &.button__search {
+        cursor: default;
+        background: transparent;
+        border-radius: 2px;
+        border: 2px solid $main-color;
+        margin-right: 20px;
+
+        input {
+            color: $grey;
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 16px;
+
+            &:active {
+                border: none;
+            }
+        }
+
+        i {
+            cursor: default;
+            padding: 8px;
+        }
+    }
+
+    &.button__innersearch {
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        background-color: #4caf50;
+        color: #fff;
+    }
+
+    &__modal {
+        padding: 8px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+
+    }
+
+    &__apply {
+        color: #fff;
+        background-color: #4caf50;
+    }
+
+    &__close {
+        background-color: #f44336;
+    }
+
+    &:hover {
+        font-weight: bold;
+    }
+
+    &__tracking {
+        color: $grey;
+        min-width: 180px;
+        background-color: #ccc;
+
+        &__active {
+            color: #fff;
+            background-color: #2196F3;
+        }
+    }
+
+    &:disabled {
+        color: $grey;
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+}
+
+.control {
+    border-radius: 4px;
+    font-size: 18px;
+    width: 48px;
+    display: block;
+    margin: 0 16px;
+    padding: 8px;
+    background-color: #fff;
+    cursor: pointer;
+
+    &__remove {
+        color: #d2483e;
+        border: 1px solid #d2483e;
+
+        &:hover {
+            background-color: #d2483e;
+            color: #fff;
+        }
+    }
+
+    &__settings {
+        color: #2196F3;
+        border: 1px solid #2196F3;
+
+        &:hover {
+            background-color: #2196F3;
+            color: #fff;
+        }
+    }
+}

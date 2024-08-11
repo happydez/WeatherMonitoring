@@ -1,0 +1,19 @@
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 64vh;
+}
+
+.weather__content {
+  flex: 1;
+}
+
+.pagination-container {
+  margin-top: auto;
+}
+
+.empty {
+  &.empty__lbox {
+    height: 53px;
+  }
+}

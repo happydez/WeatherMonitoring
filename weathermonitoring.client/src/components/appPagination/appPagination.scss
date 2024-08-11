@@ -1,0 +1,64 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  li {
+    box-shadow: none;
+  }
+
+  .page-item {
+    margin: 0 3px;
+    list-style: none;
+    padding: 12px;
+
+    .page-link {
+      display: block;
+      padding: 5px 10px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+
+    &.active .page-link {
+      background: #4CAF50;
+      color: #fff;
+      border-color: #4CAF50;
+    }
+
+    &.disabled .page-link {
+      background: #e0e0e0;
+      cursor: not-allowed;
+    }
+
+    &.arrow .page-link {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      padding: 0 8px;
+    }
+
+    &.dots {
+      padding: 5px 10px;
+      color: #777;
+      cursor: default;
+    }
+  }
+
+  @media (max-height: 940px) {
+    margin-top: 0px;
+  }
+
+  @media (max-height: 890px) {
+    margin-top: 20px;
+  }
+}
+  

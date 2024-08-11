@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  weathermonitoring.pgadmin:
+    ports:
+      - "5050:80"
+    networks:
+      - shared_weathermonitoring_net
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+
+  weathermonitoring.postgresql:
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
+    ports:
+      - "45432:5432"
+    networks:
+      - shared_weathermonitoring_net
+    volumes:      
+      - weathermonitoring-pgdata:/var/lib/postgresql/data
+
+  weathermonitoring.server:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=5000
+      - REACT_APP_CLIENT_API_BASE=http://localhost:10000/api/v1/
+    ports:
+      - "10000:5000"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    env_file:
+      - env.api
+      - env.client
+
+volumes:
+  weathermonitoring-pgdata:
+
+networks:
+  shared_weathermonitoring_net:
+    name: net_weathermonitoring
+    driver: bridge

@@ -1,0 +1,35 @@
+.weather {
+    &.weather__temperatureCelsius {
+        color: rgba(75,192,192,1);
+        text-shadow: 1px 1px 1px #161616;
+    }
+
+    &.weather__humidity {
+        color: rgba(153,102,255,1);
+        text-shadow: 1px 1px 1px #161616;
+    }
+
+    &.weather__pressureIn {
+        color: rgba(255,159,64,1);
+        text-shadow: 1px 1px 1px #161616;
+    }
+
+    &.weather__windSpeedKph {
+        color: rgba(54,162,235,1);
+        text-shadow: 1px 1px 1px #161616;
+    }
+
+    &.weather__date {
+        color: brown;
+        text-shadow: 0.5px 0.5px 0.5px #161616;
+    }
+}
+
+.error-message {
+    color: #f44336;
+    font-weight: bold;
+
+    &.error-message-weather-details {
+        margin-bottom: 1.5rem;
+    }
+}

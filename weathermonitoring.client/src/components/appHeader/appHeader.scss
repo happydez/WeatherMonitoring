@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+
+header {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+    .btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: 280px;
+
+        button {
+            display: block;
+
+        }
+    }
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+}
