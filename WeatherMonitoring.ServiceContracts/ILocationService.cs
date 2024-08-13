@@ -8,6 +8,7 @@ namespace WeatherMonitoring.ServiceContracts
     {
         Task<(IEnumerable<LocationDto> locations, MetaData metaData)> GetAllLocationsAsync(LocationParameters locationParameters, bool trackChanges);
         Task<LocationDto> GetLocationAsync(Guid locationId, bool trackChanges);
+        Task<LocationDto> GetLocationByNameAsync(string fullName, bool trackChanges);
         Task<LocationDto> CreateLocationAsync(LocationForCreationDto location);
         Task<IEnumerable<LocationDto>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
         Task<(IEnumerable<LocationDto> locations, string ids)> CreateLocationCollectionAsync(IEnumerable<LocationForCreationDto> locationCollection);

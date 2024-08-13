@@ -46,5 +46,11 @@ namespace WeatherMonitoring.Repository
             return (await FindByCondition(l => l.Id.Equals(locationId), trackChanges)
                 .SingleOrDefaultAsync())!;
         }
+
+        public async Task<Location> GetLocationByNameAsync(string fullName, bool trackChanges)
+        {
+            return await FindByCondition(l => string.Join(',', l.Name, l.Region, l.Country).Equals(fullName), trackChanges)
+                .SingleOrDefaultAsync();
+        }
     }
 }

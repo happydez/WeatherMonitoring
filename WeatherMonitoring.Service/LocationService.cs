@@ -23,10 +23,16 @@ namespace WeatherMonitoring.Service
 
         public async Task<LocationDto> CreateLocationAsync(LocationForCreationDto location)
         {
-            var locationEntity = _mapper.Map<Location>(location);
+            var locationFullName = string.Join(',', location.Name, location.Region, location.Country);
+            var locationEntity = await _repository.Location.GetLocationByNameAsync(locationFullName, trackChanges: false);
 
-            _repository.Location.CreateLocation(locationEntity);
-            await _repository.SaveAsync();
+            if (locationEntity is null)
+            {
+                locationEntity = _mapper.Map<Location>(location);
+                _repository.Location.CreateLocation(locationEntity);
+
+                await _repository.SaveAsync();
+            }
 
             var locationToReturn = _mapper.Map<LocationDto>(locationEntity);
 
@@ -93,6 +99,20 @@ namespace WeatherMonitoring.Service
         public async Task<LocationDto> GetLocationAsync(Guid locationId, bool trackChanges)
         {
             var location = await GetLocationAndCheckIfItExists(locationId, trackChanges);
+
+            var locationDto = _mapper.Map<LocationDto>(location);
+
+            return locationDto;
+        }
+
+        public async Task<LocationDto> GetLocationByNameAsync(string fullName, bool trackChanges)
+        {
+            var location = await _repository.Location.GetLocationByNameAsync(fullName, trackChanges);
+
+            if (location is null)
+            {
+                throw new LocationNotFoundByNameException(fullName);
+            }
 
             var locationDto = _mapper.Map<LocationDto>(location);
 
