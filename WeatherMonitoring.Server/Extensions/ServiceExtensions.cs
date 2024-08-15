@@ -7,6 +7,8 @@ using WeatherMonitoring.ServiceContracts;
 using WeatherMonitoring.WeatherAPI;
 using WeatherMonitoring.Entities.Exceptions;
 using Asp.Versioning;
+using System.Globalization;
+using System.Threading.RateLimiting;
 
 namespace WeatherMonitoring.Server.Extensions
 {
@@ -40,6 +42,41 @@ namespace WeatherMonitoring.Server.Extensions
                 options.SubstituteApiVersionInUrl = true;
                 options.GroupNameFormat = "'v'VVV";
                 options.FormatGroupName = (group, version) => $"{group} - {version}";
+            });
+        }
+
+        public static void ConfigureRateLimiter(this IServiceCollection services, IConfiguration configuration)
+        {
+            var rateLimitOptions = new RateLimitOptions();
+
+            configuration.GetSection(RateLimitOptions.RateLimit).Bind(rateLimitOptions);
+
+            services.AddRateLimiter(_ =>
+            {
+                _.OnRejected = (context, _) =>
+                {
+                    if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+                    {
+                        context.HttpContext.Response.Headers.RetryAfter = ((int)retryAfter.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo);
+                    }
+
+                    context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+                    context.HttpContext.Response.WriteAsync("Too many requests. Please try again later.");
+
+                    return new ValueTask();
+                };
+
+                _.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+                    RateLimitPartition.GetFixedWindowLimiter("GlobalLimiter",
+                    partition => new FixedWindowRateLimiterOptions
+                    {
+                        AutoReplenishment = rateLimitOptions.AutoReplenishment,
+                        PermitLimit = rateLimitOptions.PermitLimit,
+                        QueueLimit = rateLimitOptions.QueueLimit,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        Window = TimeSpan.FromSeconds(rateLimitOptions.ReplenishmentPeriod)
+                    }
+                ));
             });
         }
 

@@ -15,6 +15,7 @@ LogManager.Setup().LoadConfigurationFromFile(Path.Combine(Directory.GetCurrentDi
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureCors();
 builder.Services.ConfigureAPIVersioning();
+builder.Services.ConfigureRateLimiter(builder.Configuration);
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureWeatherAPI(builder.Configuration);
 builder.Services.ConfigureSqlContextFactory(builder.Configuration);

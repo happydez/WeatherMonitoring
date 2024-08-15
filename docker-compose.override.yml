@@ -26,7 +26,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=5000
-      - REACT_APP_CLIENT_API_BASE=http://localhost:10000/api/v1/
     ports:
       - "10000:5000"
     volumes:

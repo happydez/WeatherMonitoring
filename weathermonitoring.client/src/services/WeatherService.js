@@ -1,6 +1,6 @@
 class WeatherService {
-    _port = 10000;
-    _apiBase = `http://localhost:${this._port}/api/v1/`;
+    _port = 5000;
+    _apiBase = process.env.REACT_APP_CLIENT_API_BASE || `http://localhost:${this._port}/api/v1/`;
 
     getResource = async (url) => {
         let response = await fetch(url);

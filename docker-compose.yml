@@ -16,3 +16,4 @@ services:
       dockerfile: WeatherMonitoring.Server/Dockerfile
     depends_on:
       - weathermonitoring.pgadmin
+    restart: always

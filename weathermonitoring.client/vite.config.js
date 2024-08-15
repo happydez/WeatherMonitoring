@@ -39,9 +39,12 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
+    define: {
+        'process.env.REACT_APP_CLIENT_API_BASE': JSON.stringify(process.env.REACT_APP_CLIENT_API_BASE)
+    },
     server: {
         proxy: {
-            '^/weatherforecast': {
+            '^/': { // weatherforecast
                 target,
                 secure: false
             }

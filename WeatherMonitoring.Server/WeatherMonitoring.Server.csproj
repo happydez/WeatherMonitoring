@@ -8,7 +8,7 @@
     <UserSecretsId>85c77f73-fff1-4e42-9250-1a43e02747a6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <SpaRoot>..\weathermonitoring.client</SpaRoot>
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+    <SpaProxyLaunchCommand>npm run build</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
