@@ -24,15 +24,19 @@ namespace WeatherMonitoring.Service
         public async Task<LocationDto> CreateLocationAsync(LocationForCreationDto location)
         {
             var locationFullName = string.Join(',', location.Name, location.Region, location.Country);
-            var locationEntity = await _repository.Location.GetLocationByNameAsync(locationFullName, trackChanges: false);
+            var locationEntity = await _repository.Location.GetLocationByNameAsync(locationFullName, trackChanges: true);
 
             if (locationEntity is null)
             {
                 locationEntity = _mapper.Map<Location>(location);
                 _repository.Location.CreateLocation(locationEntity);
-
-                await _repository.SaveAsync();
             }
+            else
+            {
+                _mapper.Map(location, locationEntity);
+            }
+
+            await _repository.SaveAsync();
 
             var locationToReturn = _mapper.Map<LocationDto>(locationEntity);
 

@@ -3,7 +3,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using WeatherMonitoring.Entities.WeatherAPIModels;
 using WeatherMonitoring.Server.Presentation.ActionFilters;
 using WeatherMonitoring.Server.Presentation.ModelBinders;
 using WeatherMonitoring.ServiceContracts;
@@ -71,10 +70,40 @@ namespace WeatherMonitoring.Server.Presentation.Controllers
 
             var createdLocations = await _service.LocationService.CreateLocationCollectionAsync(locationCollection);
 
+            var weatherParametrs = new WeatherParameters()
+            {
+                Offset = 0,
+                Limit = 1,
+                Desc = true
+            };
+
             int wi = 0;
             foreach (var createdLocation in createdLocations.locations)
             {
-                await _service.WeatherService.CreateWeatherForLocationAsync(createdLocation.Id, weathersDto[wi], trackChanges: false);
+                bool needWeather = false;
+                var weather = (await _service.WeatherService.GetWeathersAsync(createdLocation.Id, weatherParametrs, trackChanges: false)).weathers;
+
+                if (weather.Count() == 0)
+                {
+                    needWeather = true;
+                }
+                else
+                {
+                    var now = DateTime.Now;
+                    var timeZoneId = TimeZoneInfo.FindSystemTimeZoneById(createdLocation.TzId!);
+                    var time = TimeZoneInfo.ConvertTime(now, timeZoneId);
+
+                    if (weather.First().LastUpdated <= time.AddMinutes(-30))
+                    {
+                        needWeather = true;
+                    }
+                }
+
+                if (needWeather)
+                {
+                    await _service.WeatherService.CreateWeatherForLocationAsync(createdLocation.Id, weathersDto[wi], trackChanges: false);
+                }
+
                 wi++;
             }
 
@@ -91,8 +120,37 @@ namespace WeatherMonitoring.Server.Presentation.Controllers
             location.TzId = apiResponse.Location!.TzId;
             var createdLocation = await _service.LocationService.CreateLocationAsync(location);
 
-            var weatherDto = _mapper.Map<WeatherForCreationDto>(apiResponse);
-            await _service.WeatherService.CreateWeatherForLocationAsync(createdLocation.Id, weatherDto, trackChanges: false);
+            var weatherParametrs = new WeatherParameters()
+            {
+                Offset = 0,
+                Limit = 1,
+                Desc = true
+            };
+
+            bool needWeather = false;
+            var weather = (await _service.WeatherService.GetWeathersAsync(createdLocation.Id, weatherParametrs, trackChanges: false)).weathers;
+
+            if (weather.Count() == 0)
+            {
+                needWeather = true;
+            }
+            else
+            {
+                var now = DateTime.Now;
+                var timeZoneId = TimeZoneInfo.FindSystemTimeZoneById(createdLocation.TzId!);
+                var time = TimeZoneInfo.ConvertTime(now, timeZoneId);
+
+                if (weather.First().LastUpdated <= time.AddMinutes(-30))
+                {
+                    needWeather = true;
+                }
+            }
+
+            if (needWeather)
+            {
+                var weatherDto = _mapper.Map<WeatherForCreationDto>(apiResponse);
+                await _service.WeatherService.CreateWeatherForLocationAsync(createdLocation.Id, weatherDto, trackChanges: false);
+            }
 
             return CreatedAtRoute("LocationById", new { id = createdLocation.Id }, createdLocation);
         }
